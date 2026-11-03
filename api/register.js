@@ -22,7 +22,10 @@ module.exports = async (req, res) => {
     })
     .select()
     .single();
-  if (error) return res.status(500).json({ error: 'บันทึกไม่สำเร็จ กรุณาลองใหม่อีกครั้ง' });
-  await log(data.id, 'player_registered', { consent: CONSENT_VERSION }); // no personal data in logs
-  res.status(200).json({ token, player: await snapshot(data) });
+  if (error) {
+    console.error('REGISTER ERROR:', { code: error.code, message: error.message });
+    return res.status(500).json({ error: 'บันทึกไม่สำเร็จ กรุณาลองใหม่อีกครั้ง' });
+  }
+  await log(data.id, 'player_registered', { consent: CONSENT_VERSION });
+  return res.status(200).json({ token, player: await snapshot(data) });
 };

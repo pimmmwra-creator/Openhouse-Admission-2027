@@ -7,7 +7,10 @@ module.exports = async (req, res) => {
 
   const { count } = await sb.from('stamps').select('id', { count: 'exact', head: true }).eq('player_id', p.id);
   // UNIQUE (player_id): second finish fails with 23505 -> we just return the existing reward
-  const { error } = await sb.from('rewards').insert({ player_id: p.id, stamp_count: count || 0 });
+  const { error } = await sb.from('rewards').insert({
+    player_id: p.id, stamp_count: count || 0,
+    status: 'REDEEMED', redeemed_at: new Date().toISOString(), redeemed_by: 'self', // any stamp count (1, 2-3, all) is REDEEMED right away
+  });
   if (error && error.code !== '23505') return res.status(500).json({ error: 'บันทึกไม่สำเร็จ กรุณาลองใหม่' });
   if (!error) await log(p.id, 'event_finished', { stamps: count || 0 });
   res.status(200).json({ player: await snapshot(p) });
