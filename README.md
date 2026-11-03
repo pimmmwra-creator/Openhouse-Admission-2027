@@ -49,3 +49,13 @@ npm i -g vercel && npm install && vercel dev
 - Deletion on request: the "ลบข้อมูล" button in `/admin.html` removes one player and their related data.
 - Review the notice text with your university's data protection contact before launch. Participants under 20 may need parental/guardian consent under PDPA depending on the case.
 "# Openhouse-Admission-2027" 
+
+
+## Supabase connection diagnostics
+After deploying to Vercel, open `/api/health` on the production domain.
+- `ok: true` means Vercel can reach the Supabase REST API using the configured service-role key.
+- `stage: configuration` means the URL or service-role key is missing/invalid in the active deployment environment.
+- `stage: authentication` means Supabase is reachable but rejected the configured key.
+- `stage: network` means the Vercel function could not reach the Supabase host (check the project URL, project status, DNS/network, and Vercel logs).
+
+The health endpoint never returns the service-role key. After changing Production Environment Variables, create a new production deployment.
