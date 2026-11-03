@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Open House Digital Stamp Rally</title>
+<link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#14186b;--card:#232a9c;--ink:#fff;--mute:#e3e7ff;--p:#ffe600;--b:#00f0ff;--c:#00f0ff;--ok:#22e06b;--bad:#ff5a7a;--line:#4a56e0;--g:linear-gradient(135deg,#ff1f8e,#ff6a00);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font-family:Sriracha,system-ui,sans-serif;font-synthesis:none;background:var(--bg);color:var(--ink);min-height:100vh;background-image:radial-gradient(circle at 85% 0,rgba(255,31,142,.4),transparent 45%),radial-gradient(circle at 0 95%,rgba(0,240,255,.35),transparent 45%),radial-gradient(2px 2px at 20% 30%,rgba(255,255,255,.7),transparent),radial-gradient(1.5px 1.5px at 70% 60%,rgba(255,255,255,.5),transparent),radial-gradient(2px 2px at 85% 20%,rgba(255,255,255,.7),transparent),radial-gradient(1.5px 1.5px at 40% 85%,rgba(255,255,255,.5),transparent),radial-gradient(1.5px 1.5px at 8% 70%,rgba(255,255,255,.6),transparent)}
+body::before{content:"";position:fixed;left:0;right:0;top:0;height:60px;z-index:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='56'%3E%3Cpath d='M0 4Q75 20 150 4' stroke='%23333' fill='none' stroke-width='2'/%3E%3Cpath d='M10 6L38 10L22 40Z' fill='%23d63384'/%3E%3Cpath d='M55 12L85 14L68 44Z' fill='%23f1c40f'/%3E%3Cpath d='M105 12L135 9L120 40Z' fill='%232962ff'/%3E%3C/svg%3E") repeat-x}
+main{max-width:760px;margin:0 auto;padding:62px 16px 60px;position:relative;z-index:1}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0 14px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;line-height:1.1}
+.logo i{width:42px;height:42px;border-radius:14px;background:var(--g);display:grid;place-items:center;font-style:normal;font-size:22px;box-shadow:0 6px 16px rgba(61,123,255,.4)}
+.logo small{display:block;font-weight:500;color:var(--mute);font-size:12px}
+.card{background:var(--card);border-radius:24px;padding:20px;box-shadow:0 10px 30px rgba(80,60,180,.12);border:1px solid var(--line)}
+h1{font-size:28px;margin:0 0 6px;font-weight:800}h2{font-size:20px;margin:0 0 8px}p{margin:0 0 12px;color:var(--mute)}
+input{width:100%;padding:14px 16px;border-radius:16px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:16px;margin-bottom:12px}
+input:focus,button:focus-visible{outline:3px solid var(--c);outline-offset:2px}
+.btn{border:0;border-radius:16px;padding:14px 20px;font:inherit;font-weight:700;font-size:16px;color:#fff;background:var(--g);cursor:pointer;width:100%;box-shadow:0 8px 20px rgba(61,123,255,.35);transition:transform .15s}
+.btn:active{transform:scale(.97)}.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--p);box-shadow:none;border:2px solid var(--line);width:auto;padding:8px 14px;font-size:14px}
+.btn.fin{background:linear-gradient(135deg,#ff2d95,#ffb400);box-shadow:0 8px 20px rgba(255,122,120,.4);font-size:18px;padding:18px}
+.bar{height:18px;border-radius:99px;background:var(--line);overflow:hidden}.bar b{display:block;height:100%;background:var(--g);border-radius:99px;transition:width .7s cubic-bezier(.3,1.4,.5,1)}
+.big{font-size:34px;font-weight:800}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.stamp{background:var(--card);border-radius:24px;padding:16px;border:2px solid var(--line);text-align:center;position:relative}
+.stamp .ic{width:84px;height:84px;margin:0 auto 10px;border-radius:50%;display:grid;place-items:center;font-size:42px;background:var(--k,#888);filter:grayscale(1) opacity(.5);border:7px solid #f4f1f1;transition:.5s}
+.stamp.on{border-color:var(--ok)}.stamp.on .ic{filter:none;transform:rotate(-8deg);box-shadow:0 8px 22px rgba(124,77,255,.45)}
+.stamp.on::after{content:"✓";position:absolute;top:10px;right:12px;width:28px;height:28px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-weight:800}
+.stamp h3{margin:0 0 2px;font-size:16px}.stamp small{color:var(--mute);display:block;margin-bottom:10px;min-height:18px}
+.msg{padding:12px 14px;border-radius:14px;margin:10px 0;font-weight:500}.msg.e{background:rgba(240,62,94,.12);color:var(--bad)}.msg.o{background:rgba(18,184,136,.14);color:var(--ok)}.msg.w{background:rgba(255,159,67,.16);color:#d9730d}
+.reward{text-align:center;border:3px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,var(--g) border-box}
+.reward .ice{font-size:84px;animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px) rotate(4deg)}}
+.reward h1{font-size:26px;line-height:1.35}
+.tag{display:inline-block;padding:6px 14px;border-radius:99px;font-weight:700;font-size:14px}.t-n{background:#fff3bf;color:#8a6500}.t-r{background:#d3f9d8;color:#1c7a34}.t-i{background:#ffe3e3;color:#c92a2a}
+.meta{text-align:left;background:var(--bg);border-radius:16px;padding:12px 16px;margin:14px 0;font-size:14px;word-break:break-all}
+.row{display:flex;gap:10px;flex-wrap:wrap}.stat{flex:1 1 130px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px}.stat b{font-size:26px;display:block}.stat span{color:var(--mute);font-size:13px}
+.tw{overflow-x:auto;margin-top:10px}table{border-collapse:collapse;width:100%;font-size:13px;min-width:520px}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
+.chart{display:flex;align-items:flex-end;gap:14px;height:120px;margin:12px 0}.chart div{flex:1;text-align:center;font-size:12px}.chart i{display:block;background:var(--g);border-radius:10px 10px 0 0;min-height:4px}
+.sw{display:flex;gap:6px;margin:16px 0 8px}.sw button{flex:1}
+.inv{position:relative;background:#fffafa;border:3px solid #3b2f6b;padding:38px 20px 26px;text-align:center;color:#3b2f6b;margin-top:8px}
+.inv h1{font-size:clamp(24px,6.5vw,38px);font-weight:400;line-height:1.35;margin:6px 0 14px;color:#3b2f6b}
+.inv p{color:#3b2f6b;font-size:14px;line-height:1.75}
+.inv .corner{position:absolute;font-size:34px;line-height:1;opacity:.85}
+.orn{font-size:26px;letter-spacing:6px;margin:6px 0 10px}
+.fld{display:flex;align-items:baseline;gap:8px;text-align:left;margin:10px 0}.fld label{white-space:nowrap}
+.fld input{margin:0;border:0;border-bottom:2px dotted #3b2f6b;border-radius:0;background:transparent;color:#3b2f6b;padding:6px 4px;min-width:0}
+.inv .btn{background:#3b2f6b;box-shadow:none;border-radius:99px;margin-top:14px}
+.ttl{font-family:Sriracha,sans-serif;font-size:38px;line-height:1.05;color:#ffe000;-webkit-text-stroke:6px #ff3d2e;paint-order:stroke fill;transform:rotate(-2deg);text-shadow:0 4px 0 rgba(0,0,0,.25)}
+.ttl small{display:block;font-family:Sriracha,sans-serif;font-weight:400;font-size:16px;color:#3fa9ff;-webkit-text-stroke:0;text-shadow:none;margin-top:8px}
+.grid .stamp:nth-child(1) .ic{--k:#2ee14a}.grid .stamp:nth-child(2) .ic{--k:#00f0ff}.grid .stamp:nth-child(3) .ic{--k:#ff7a00}.grid .stamp:nth-child(4) .ic{--k:#ffea00}
+.rw b{color:var(--p)}
+h1,h2,h3,b,strong,.btn,.big,.tag{font-weight:400}
+.pv{background:#f1eefb;border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.7;text-align:left;max-height:170px;overflow:auto;margin:14px 0 10px;color:#3b2f6b}
+.ck{display:flex;gap:10px;align-items:flex-start;text-align:left;font-size:13px;line-height:1.6;margin:8px 0}
+.ck input{width:22px;height:22px;margin:2px 0 0;padding:0;flex:none;accent-color:#3b2f6b}
+textarea{width:100%;padding:14px 16px;border-radius:16px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:16px;margin-bottom:12px;resize:vertical}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:9}
+.link{background:none;border:0;color:var(--p);font:inherit;font-weight:600;cursor:pointer;padding:6px 0}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<canvas id="cf"></canvas><main id="app"></main>
+<script>
+const BOOTHS=[{id:'BOOTH01',n:'VR',e:'🥽',t:'VR Experience',d:'ลองสวมแว่น VR แล้วผจญภัยในโลกเสมือน'},{id:'BOOTH02',n:'IoT',e:'📡',t:'IoT Lab',d:'ควบคุมอุปกรณ์อัจฉริยะผ่านเซนเซอร์จริง'},{id:'BOOTH03',n:'Project Showcase',e:'🚀',t:'Project Showcase',d:'ชมผลงานโปรเจกต์จากรุ่นพี่'},{id:'BOOTH04',n:'Data Analysis',e:'📊',t:'Data Analysis',d:'เล่นกับข้อมูลและกราฟแบบสนุก ๆ'}];
+const RW=`<h2>🎁 ของรางวัล</h2><p style="margin:0;line-height:1.8"><b>เล่น 1 ฐาน:</b> ไอติม + ลุ้นของรางวัลเล็ก (กดติดตามอินสตาแกรม SMO.ITD.KMUTNB)<br><b>เล่น 2–3 ฐาน:</b> ไอติม + ลุ้นของรางวัลเล็กและกลาง<br><b>เล่นครบทุกฐาน:</b> ไอติม + ลุ้นของรางวัลใหญ่</p>`;
+const tier=n=>n>=4?'ไอติม + ลุ้นของรางวัลใหญ่':n>=2?'ไอติม + ลุ้นของรางวัลเล็กและกลาง':n>=1?'ไอติม + ลุ้นของรางวัลเล็ก (กดติดตามอินสตาแกรม SMO.ITD.KMUTNB)':'ไอติม';
+const TK='ohsr_token',$=s=>document.querySelector(s),app=$('#app');
+const tok=()=>{try{return localStorage.getItem(TK)}catch(e){return null}};
+const fmt=t=>t?new Date(t).toLocaleString('th-TH',{dateStyle:'medium',timeStyle:'short'}):'-';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const go=h=>{location.hash=h};
+let P=null;
+async function api(path,body){const t=tok();try{const r=await fetch('/api/'+path,{method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json',...(t?{Authorization:'Bearer '+t}:{})},body:body===undefined?undefined:JSON.stringify(body)});let j={};try{j=await r.json()}catch(e){}return{ok:r.ok,status:r.status,...j}}catch(e){return{ok:false,status:0,error:'เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาลองใหม่'}}}
+const head=()=>`<header class="top"><div class="logo"><div class="ttl">เปิดบ้าน-ไอทีดี<small>รวมฮิต 4 ฐานดัง ต้องเรียน</small></div></div></header>`;
+async function start(){
+ app.innerHTML='<p style="text-align:center;padding:40px 0">กำลังโหลด…</p>';
+ if(tok()){const r=await api('me');
+  if(r.ok)P=r.player;
+  else if(r.status===401){try{localStorage.removeItem(TK)}catch(e){}}
+  else{app.innerHTML=`<div class="card"><p>${esc(r.error||'เกิดข้อผิดพลาด')}</p><button class="btn" onclick="start()">ลองใหม่</button></div>`;return}}
+ render();
+}
+function render(){const h=location.hash.slice(1)||'/';
+ if(!P)return invite();
+ if(h.startsWith('/booth/'))return booth(h.split('/')[2]);
+ if(h==='/reward')return reward();
+ if(h==='/feedback')return feedback();
+ if(h==='/done')return done();
+ if(h!=='/home')return go('/home');
+ home();
+}
+function invite(){
+ app.innerHTML=`<div class="inv"><span class="corner" style="top:6px;left:10px">❁</span><span class="corner" style="bottom:6px;right:10px">❁</span>
+<h1>ขอเชิญทุกท่านเข้าร่วมงาน เปิดบ้านไอทีดี</h1>
+<p>ภายในงานพบกับกิจกรรม ๔ ฐานมหาสนุก ที่เตรียมไว้ให้ทุกท่านได้ร่วมสนุก และลุ้นรับของรางวัลตลอดงาน<br>ณ คณะเทคโนโลยีสารสนเทศและนวัตกรรมดิจิทัล มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ<br>วันที่ ๖-๗ พฤศจิกายน พ.ศ. ๒๕๖๙ เวลา ๘.๓๐-๑๖.๐๐ น.</p>
+<div class="orn">❦ ✿ ❦</div><div id="m"></div>
+<div class="fld"><label for="n">นามผู้เข้าร่วม</label><input id="n" autocomplete="name" maxlength="100"></div>
+<div class="fld"><label for="s">โรงเรียน</label><input id="s" maxlength="100"><label for="g">ชั้น</label><input id="g" maxlength="20" style="max-width:80px"></div>
+<div class="pv"><b>การแจ้งการเก็บรวบรวมข้อมูลส่วนบุคคล (PDPA)</b><br>
+<b>ข้อมูลที่เก็บ:</b> ชื่อ โรงเรียน ชั้น ข้อมูลการเล่น (แสตมป์ เวลา การรับรางวัล) และความคิดเห็นที่คุณเลือกกรอก<br>
+<b>วัตถุประสงค์:</b> ดำเนินกิจกรรม Open House Digital Stamp Rally และวิเคราะห์เพื่อปรับปรุงการจัดกิจกรรมในอนาคต จะไม่นำไปใช้เพื่อวัตถุประสงค์อื่นโดยไม่ได้รับความยินยอมที่เหมาะสมจากคุณก่อน<br>
+<b>ผู้เข้าถึงข้อมูล:</b> เฉพาะผู้ดูแลระบบและผู้จัดงานที่เกี่ยวข้อง ข้อมูลของคุณจะไม่แสดงต่อผู้เล่นคนอื่น<br>
+<b>ระยะเวลาเก็บ:</b> ไม่เกิน 90 วันหลังวันจัดงาน แล้วลบข้อมูลส่วนบุคคลถาวร<br>
+<b>สิทธิของคุณ:</b> ขอเข้าถึง แก้ไข ลบข้อมูล หรือถอนความยินยอมได้ ติดต่ออินสตาแกรม SMO.ITD.KMUTNB</div>
+<label class="ck"><input type="checkbox" id="ck"><span>ข้าพเจ้ายินยอมให้จัดเก็บข้อมูลส่วนบุคคล ได้แก่ ชื่อ โรงเรียน ชั้น เพื่อใช้ในการดำเนินกิจกรรม Open House Digital Stamp Rally และนำข้อมูลไปวิเคราะห์และปรับปรุงพัฒนาการจัดกิจกรรมในอนาคต</span></label>
+<button class="btn" id="go">เริ่มสะสมแสตมป์</button>
+<p style="margin-top:18px">๔ ฐาน ๔ ความสนุก 🎪<br>ร่วมติดตามข่าวสารและกิจกรรมได้ที่ อินสตาแกรม: SMO.ITD.KMUTNB</p></div>`;
+ $('#go').onclick=async()=>{const n=$('#n').value.trim(),s=$('#s').value.trim(),g=$('#g').value.trim(),m=$('#m'),b=$('#go');
+  if(n.length<2||s.length<2||!g){m.innerHTML='<div class="msg e">กรอกนามผู้เข้าร่วม โรงเรียน และชั้นให้ครบ</div>';return}
+  if(!$('#ck').checked){m.innerHTML='<div class="msg e">กรุณากดยอมรับการเก็บข้อมูลส่วนบุคคลก่อนลงทะเบียน</div>';return}
+  b.disabled=true;const r=await api('register',{name:n,school:s,grade:g,consent:true});
+  if(!r.ok){b.disabled=false;m.innerHTML=`<div class="msg e">${esc(r.error||'ลงทะเบียนไม่สำเร็จ')}</div>`;return}
+  try{localStorage.setItem(TK,r.token)}catch(e){}
+  P=r.player;go('/home');render();};
+}
+function home(){const p=P,n=Object.keys(p.stamps).length;
+ app.innerHTML=head()+`<div class="card"><p style="margin:0">สวัสดี ${esc(p.name)} 👋</p><h2>สะสมแสตมป์ให้ครบทั้ง 4 บูธ!</h2><div class="bar"><b style="width:${n*25}%"></b></div><p style="margin:10px 0 0;font-weight:700;color:var(--p)">${n} / 4 STAMPS COLLECTED</p></div>
+ <div class="grid">${BOOTHS.map(b=>{const t=p.stamps[b.id];return `<div class="stamp ${t?'on':''}"><div class="ic">${b.e}</div><h3>${b.n}</h3><small>${t?'สำเร็จแล้ว! '+fmt(t):'ยังไม่ได้เข้าร่วม'}</small>${t||p.reward?'':`<button class="btn" style="padding:10px;font-size:14px" onclick="go('/booth/${b.id}')">ไปสะสมแสตมป์</button>`}</div>`}).join('')}</div>
+ <div class="card rw">${RW}</div><div id="m"></div>
+ ${p.reward?`<button class="btn" style="margin-top:16px" onclick="go('/reward')">🍦 ดูหน้าจอรับไอติม</button>`:`<button class="btn fin" id="fin" style="margin-top:16px">🏁 เสร็จสิ้นกิจกรรม รับไอติม</button>`}`;
+ const f=$('#fin');if(f)f.onclick=async()=>{f.disabled=true;const r=await api('finish',{});
+  if(r.ok){P=r.player;go('/reward');render()}else{f.disabled=false;$('#m').innerHTML=`<div class="msg e">${esc(r.error||'เกิดข้อผิดพลาด')}</div>`}};
+}
+function booth(id){const b=BOOTHS.find(x=>x.id===id);if(!b)return go('/home');const done=P.stamps[id];
+ app.innerHTML=head()+`<div class="card" style="text-align:center"><div style="font-size:64px">${b.e}</div><h1>${b.t}</h1><p>ทำกิจกรรมที่บูธ ${b.n} ให้เรียบร้อย แล้วขอรหัสลับจากพี่สตาฟ</p><p style="margin-top:-6px">${b.d}</p>
+ <div id="m">${done?'<div class="msg o">คุณได้รับแสตมป์บูธนี้แล้ว</div>':''}</div>
+ ${done?'':'<input id="k" placeholder="กรอกรหัสลับของคุณ" autocapitalize="characters" style="text-align:center"><button class="btn" id="u">🔓 ปลดล็อกแสตมป์</button>'}
+ <button class="link" onclick="go('/home')">← กลับหน้า Home</button></div>`;
+ const u=$('#u');if(!u)return;
+ u.onclick=async()=>{const m=$('#m');u.disabled=true;const r=await api('unlock',{booth_id:id,code:$('#k').value});u.disabled=false;
+  if(r.ok){P.stamps[id]=r.unlocked_at;confetti();
+   app.querySelector('.card').innerHTML=`<div style="font-size:80px;animation:bob 1.2s infinite">${b.e}</div><h1>🎉 ยินดีด้วย! คุณได้รับแสตมป์แล้ว</h1><button class="btn" onclick="go('/home')">กลับหน้า Home</button>`}
+  else{if(r.status===409)P.stamps[id]=P.stamps[id]||new Date().toISOString();m.innerHTML=`<div class="msg ${r.status===429?'w':'e'}">${esc(r.error||'เกิดข้อผิดพลาด')}</div>`}};
+}
+async function reward(){const r0=await api('me');if(r0.ok)P=r0.player;
+ const p=P,rw=p.reward,n=Object.keys(p.stamps).length,st=rw?rw.status:'INVALID';
+ const cnt=`<div class="big" style="color:var(--p);margin:6px 0 14px">คุณเล่นไป ${n} จาก 4 ฐาน</div><p style="color:var(--ink);font-weight:600">รางวัลของคุณ: ${tier(n)}</p>`;
+ const next=st==='REDEEMED'?(rw.completed_at?`<button class="btn" onclick="go('/done')">🏁 เสร็จสิ้นกิจกรรม</button>`:`<button class="btn" onclick="go('/feedback')">ถัดไป → เขียนความคิดเห็น</button>`):'';
+ clearInterval(window._rp);
+ if(st==='NOT_REDEEMED')window._rp=setInterval(async()=>{if(location.hash!=='#/reward'){clearInterval(window._rp);return}const r=await api('me');if(r.ok&&r.player.reward&&r.player.reward.status==='REDEEMED'){clearInterval(window._rp);reward()}},5000);
+ const body=st==='INVALID'?`<div class="ice">🤔</div><h1>ไม่พบสิทธิ์รับรางวัล กรุณาติดต่อเจ้าหน้าที่</h1><span class="tag t-i">INVALID</span>`
+ :st==='REDEEMED'?`<div class="ice">✅</div><h1>🍦 คุณได้รับไอติมเรียบร้อยแล้ว!</h1>${cnt}<span class="tag t-r">REDEEMED</span>`
+ :`<div class="ice">🍦</div><h1>🍦 กรุณาแสดงหน้าจอนี้ให้พี่สตาฟดู เพื่อรับไอติมฟรี!</h1>${cnt}<span class="tag t-n">NOT_REDEEMED</span>`;
+ app.innerHTML=head()+`<div class="card reward">${body}${rw?`<div class="meta"><b>${esc(p.name)}</b><br>${esc(p.school)} ${esc(p.grade)}<br>Player ID: ${p.id}<br>สิ้นสุดกิจกรรม: ${fmt(rw.finished_at)}${st==='REDEEMED'?'<br>รับเมื่อ: '+fmt(rw.redeemed_at):''}</div>`:''}${next}<button class="link" onclick="go('/home')">← กลับหน้า Home</button></div>`;
+}
+function feedback(){const rw=P.reward;
+ if(!rw||rw.status!=='REDEEMED')return go('/reward');
+ if(rw.completed_at)return go('/done');
+ let rating=0;
+ app.innerHTML=head()+`<div class="card"><h2>💬 เล่าให้เราฟังหน่อย</h2><p>ให้คะแนนความสนุกของงานนี้</p>
+ <div id="st" style="display:flex;gap:6px;justify-content:center;margin-bottom:12px">${[1,2,3,4,5].map(i=>`<button class="link" data-s="${i}" aria-label="${i} ดาว" style="font-size:40px;padding:0;filter:grayscale(1)">⭐</button>`).join('')}</div>
+ <textarea id="c" rows="4" maxlength="500" placeholder="ความคิดเห็นหรือข้อเสนอแนะ (ไม่บังคับ) โปรดไม่ใส่ข้อมูลส่วนตัว"></textarea><div id="m"></div>
+ <button class="btn" id="sb">ส่งและเสร็จสิ้นกิจกรรม</button></div>`;
+ document.querySelectorAll('#st button').forEach(b=>b.onclick=()=>{rating=+b.dataset.s;document.querySelectorAll('#st button').forEach(x=>x.style.filter=+x.dataset.s<=rating?'none':'grayscale(1)')});
+ $('#sb').onclick=async()=>{const m=$('#m'),b=$('#sb');
+  if(!rating){m.innerHTML='<div class="msg e">กรุณาให้คะแนน 1-5 ดาว</div>';return}
+  b.disabled=true;const r=await api('feedback',{rating,comment:$('#c').value});
+  if(!r.ok){b.disabled=false;m.innerHTML=`<div class="msg e">${esc(r.error||'เกิดข้อผิดพลาด')}</div>`;return}
+  P=r.player;go('/done');render()};
+}
+function done(){if(!P.reward||!P.reward.completed_at)return go('/reward');const n=Object.keys(P.stamps).length;confetti();
+ app.innerHTML=head()+`<div class="card" style="text-align:center"><div style="font-size:80px">🎉</div><h1>เสร็จสิ้นกิจกรรม</h1><p>ขอบคุณที่ร่วมงานเปิดบ้านไอทีดี คุณเล่นไป ${n} จาก 4 ฐาน</p><p>ติดตามข่าวสารได้ที่อินสตาแกรม: SMO.ITD.KMUTNB</p></div>`;
+}
+function confetti(){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;const c=$('#cf'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+ const ps=[...Array(120)].map(()=>({x:Math.random()*c.width,y:-20-Math.random()*200,v:2+Math.random()*4,r:4+Math.random()*6,c:['#ff1493','#ff6a00','#ffe000','#00e5ff','#34c93a'][Math.random()*5|0],a:Math.random()*6}));
+ let f=0;(function d(){x.clearRect(0,0,c.width,c.height);ps.forEach(p=>{p.y+=p.v;p.x+=Math.sin(p.a+=.05)*2;x.fillStyle=p.c;x.fillRect(p.x,p.y,p.r,p.r*1.6)});if(++f<150)requestAnimationFrame(d);else x.clearRect(0,0,c.width,c.height)})()}
+addEventListener('hashchange',()=>{if(P||!tok())render()});start();
+</script></body></html>

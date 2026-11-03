@@ -1,0 +1,8 @@
+{
+  "name": "open-house-stamp-rally",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Open House Digital Stamp Rally - static frontend + Vercel serverless API + Supabase",
+  "dependencies": { "@supabase/supabase-js": "^2.45.0" },
+  "engines": { "node": ">=18" }
+}
