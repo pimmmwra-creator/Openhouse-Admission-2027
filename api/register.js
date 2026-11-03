@@ -29,8 +29,9 @@ module.exports = async (req, res) => {
     hasKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY
   });
 
-  return res.status(500).json({
-    error: 'Supabase configuration is incomplete'
+  return res.status(503).json({
+    error: 'ระบบยังไม่พร้อมใช้งานในขณะนี้ กรุณาแจ้งทีมงานเพื่อตรวจสอบ',
+    diagnostic: 'SUPABASE_ENV_MISSING'
   });
   }
 
