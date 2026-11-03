@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="th"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12142b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>Open House Digital Stamp Rally</title>
 <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
 <style>
@@ -64,6 +67,72 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:9}
 .stars button{font-size:44px;padding:0 2px;line-height:1.1;transition:transform .15s,filter .15s}
 .stars button:active{transform:scale(1.25)}
 .rt{text-align:center;color:var(--p);min-height:26px;margin-bottom:12px}
+
+/* Mobile and touch-device refinements */
+html,body{width:100%;overflow-x:hidden}
+body{-webkit-text-size-adjust:100%;overscroll-behavior-y:contain}
+button,input,textarea{touch-action:manipulation}
+button,.btn,.link{ -webkit-tap-highlight-color:transparent }
+button,.btn{min-height:46px}
+input,textarea{max-width:100%;min-width:0}
+main{width:100%;min-width:0}
+.card,.inv,.stamp{min-width:0}
+.meta,.pv,.msg{overflow-wrap:anywhere}
+@media (max-width:600px){
+  main{padding:62px 12px 32px}
+  header.top{padding:4px 0 14px}
+  .ttl{font-size:clamp(27px,8vw,36px);-webkit-text-stroke:5px #ff3d2e}
+  .ttl small{font-size:clamp(13px,3.8vw,16px)}
+  .card{padding:17px;border-radius:21px}
+  .inv{padding:30px 15px 22px;border-radius:23px}
+  .inv h1{font-size:clamp(24px,7vw,34px);-webkit-text-stroke:4px #ff3d2e}
+  .inv p{font-size:13px;line-height:1.75}
+  h1{font-size:clamp(23px,6.5vw,28px)}
+  h2{font-size:19px}
+  .grid{gap:10px;margin:14px 0}
+  .stamp{padding:12px 9px;border-radius:20px}
+  .stamp .ic{width:clamp(58px,18vw,76px);height:clamp(58px,18vw,76px);font-size:clamp(30px,9vw,39px);border-width:5px;margin-bottom:8px}
+  .stamp h3{font-size:clamp(14px,3.8vw,17px);overflow-wrap:anywhere}
+  .stamp small{font-size:12px;line-height:1.45;min-height:34px}
+  .stamp .btn{font-size:13px!important;padding:9px 5px!important;line-height:1.35}
+  .btn{font-size:16px;padding:13px 14px}
+  .btn.fin{font-size:17px;padding:15px}
+  .big{font-size:28px}
+  .reward .ice{font-size:70px}
+  .reward h1{font-size:23px}
+  .fld{gap:6px}
+  .fld label{font-size:13px}
+  .fld input{font-size:16px;padding:8px 3px}
+  .pv{font-size:12px;line-height:1.65;padding:11px}
+  .ck{font-size:12px;gap:8px}
+  .ck input{width:22px;height:22px}
+  .sw{gap:8px}
+  .sw button{min-width:0}
+  .stars button{font-size:40px;min-height:48px}
+  textarea{font-size:16px}
+  .stat{flex:1 1 42%;padding:11px}
+  .stat b{font-size:23px}
+}
+@media (max-width:380px){
+  main{padding-left:9px;padding-right:9px}
+  .grid{grid-template-columns:1fr;gap:11px}
+  .stamp{display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:10px;text-align:left;align-items:center}
+  .stamp .ic{grid-column:1;grid-row:1 / span 3;width:58px;height:58px;font-size:30px;margin:0}
+  .stamp h3,.stamp small{grid-column:2}
+  .stamp h3{align-self:end}
+  .stamp small{align-self:start;min-height:0;margin:0}
+  .stamp .btn{grid-column:1 / -1;margin-top:9px}
+  .stamp.on::after{top:7px;left:43px;right:auto;width:23px;height:23px}
+  .fld{flex-wrap:wrap}
+  .fld label{white-space:normal}
+  .fld input{flex:1 1 55%;width:auto}
+  .fld input#s{flex-basis:100%}
+  .fld input#g{flex:0 0 72px}
+}
+@media (hover:none){
+  .btn:active{filter:brightness(.96)}
+}
+
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
 <canvas id="cf"></canvas><main id="app"></main>
@@ -77,7 +146,7 @@ const fmt=t=>t?new Date(t).toLocaleString('th-TH',{dateStyle:'medium',timeStyle:
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const go=h=>{location.hash=h};
 let P=null;
-async function api(path,body){const t=tok();try{const r=await fetch('/api/'+path,{method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json',...(t?{Authorization:'Bearer '+t}:{})},body:body===undefined?undefined:JSON.stringify(body)});let j={};try{j=await r.json()}catch(e){}return{ok:r.ok,status:r.status,...j}}catch(e){return{ok:false,status:0,error:'เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาลองใหม่'}}}
+async function api(path,body){const t=tok();try{const r=await fetch('/api/'+path,{method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json',...(t?{Authorization:'Bearer '+t}:{})},body:body===undefined?undefined:JSON.stringify(body)});const raw=await r.text();let j={};try{j=raw?JSON.parse(raw):{}}catch(e){}if(!r.ok&&!j.error){j.error=r.status===404?'ไม่พบ API ของระบบ กรุณาตรวจสอบว่า Deploy โปรเจกต์จากโฟลเดอร์หลักที่มี api/ และ public/':r.status>=500?'เซิร์ฟเวอร์ผิดพลาด (HTTP '+r.status+') กรุณาตรวจสอบ Environment Variables และ Vercel Functions Logs':'คำขอไม่สำเร็จ (HTTP '+r.status+')'}return{ok:r.ok,status:r.status,...j}}catch(e){return{ok:false,status:0,error:'เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่'}}}
 const head=()=>`<header class="top"><div class="logo"><div class="ttl">เปิดบ้าน-ไอทีดี<small>รวมฮิต 4 ฐานดัง ต้องเรียน</small></div></div></header>`;
 async function start(){
  app.innerHTML='<p style="text-align:center;padding:40px 0">กำลังโหลด…</p>';
@@ -105,7 +174,7 @@ function invite(){
 <div class="fld"><label for="s">โรงเรียน</label><input id="s" maxlength="100"><label for="g">ชั้น</label><input id="g" maxlength="20" style="max-width:80px"></div>
 <div class="pv"><b>การแจ้งการเก็บรวบรวมข้อมูลส่วนบุคคล (PDPA)</b><br>
 <b>ข้อมูลที่เก็บ:</b> ชื่อ โรงเรียน ชั้น ข้อมูลการเล่น (แสตมป์ เวลา การรับรางวัล) และความคิดเห็นที่คุณเลือกกรอก<br>
-<b>วัตถุประสงค์:</b> ดำเนินกิจกรรม Open House Digital Stamp Rally และวิเคราะห์เพื่อปรับปรุงการจัดกิจกรรมในอนาคต จะไม่นำไปใช้เพื่อวัตถุประสงค์อื่นโดยไม่ได้รับความยินยอมที่เหมาะสมจากคุณก่อน<br>
+<b>วัตถุประสงค์:</b> ดำเนินกิจกรรม OpenHouse Stamp Rally และวิเคราะห์เพื่อปรับปรุงการจัดกิจกรรมในอนาคต จะไม่นำไปใช้เพื่อวัตถุประสงค์อื่นโดยไม่ได้รับความยินยอมที่เหมาะสมจากคุณก่อน<br>
 <b>ผู้เข้าถึงข้อมูล:</b> เฉพาะผู้ดูแลระบบและผู้จัดงานที่เกี่ยวข้อง ข้อมูลของคุณจะไม่แสดงต่อผู้เล่นคนอื่น<br>
 <b>ระยะเวลาเก็บ:</b> ไม่เกิน 90 วันหลังวันจัดงาน แล้วลบข้อมูลส่วนบุคคลถาวร<br>
 <b>สิทธิของคุณ:</b> ขอเข้าถึง แก้ไข ลบข้อมูล หรือถอนความยินยอมได้ ติดต่ออินสตาแกรม SMO.ITD.KMUTNB</div>
