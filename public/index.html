@@ -138,8 +138,8 @@ main{width:100%;min-width:0}
 <canvas id="cf"></canvas><main id="app"></main>
 <script>
 const BOOTHS=[{id:'BOOTH01',n:'VR',e:'🥽',t:'VR Experience',d:'ลองสวมแว่น VR แล้วผจญภัยในโลกเสมือน'},{id:'BOOTH02',n:'IoT',e:'📡',t:'IoT Lab',d:'ควบคุมอุปกรณ์อัจฉริยะผ่านเซนเซอร์จริง'},{id:'BOOTH03',n:'Project Showcase',e:'🚀',t:'Project Showcase',d:'ชมผลงานโปรเจกต์จากรุ่นพี่'},{id:'BOOTH04',n:'Data Analysis',e:'📊',t:'Data Analysis',d:'เล่นกับข้อมูลและกราฟแบบสนุก ๆ'}];
-const RW=`<h2>🎁 ของรางวัล</h2><p style="margin:0;line-height:1.8"><b>เล่น 1 ฐาน:</b> ไอติม + พวงกุญแจ<br><b>เล่น 2–3 ฐาน:</b> ไอติม + ลุ้นของรางวัลเล็กและกลาง<br><b>เล่นครบทุกฐาน:</b> ไอติม + ลุ้นของรางวัลใหญ่</p>`;
-const tier=n=>n>=4?'ไอติม + ลุ้นของรางวัลใหญ่':n>=2?'ไอติม + ลุ้นของรางวัลเล็กและกลาง':n>=1?'ไอติม + พวงกุญแจ':'ไอติม';
+const RW=`<h2>🎁 ของรางวัล</h2><p style="margin:0;line-height:1.8"><b>เล่น 1 ฐาน:</b> ไอติม + สติ๊กเกอร์คณะ<br><b>เล่น 2–3 ฐาน:</b> ไอติม + ลุ้นของรางวัลเล็กและกลาง<br><b>เล่นครบทุกฐาน:</b> ไอติม + ลุ้นของรางวัลใหญ่</p>`;
+const tier=n=>n>=4?'ไอติม + ลุ้นของรางวัลใหญ่':n>=2?'ไอติม + ลุ้นของรางวัลเล็กและกลาง':n>=1?'ไอติม + สติ๊กเกอร์คณะ':'ไอติม';
 const TK='ohsr_token',$=s=>document.querySelector(s),app=$('#app');
 const tok=()=>{try{return localStorage.getItem(TK)}catch(e){return null}};
 const fmt=t=>t?new Date(t).toLocaleString('th-TH',{dateStyle:'medium',timeStyle:'short'}):'-';
