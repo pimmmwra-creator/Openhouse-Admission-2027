@@ -74,7 +74,7 @@ revoke all on function purge_personal_data(int) from public, anon, authenticated
 
 -- Secret codes: CHANGE THESE before the event (they live only in the database)
 insert into booths (id, name, description, secret_code) values
- ('BOOTH01','VR','VR Experience','VR_done'),
- ('BOOTH02','IoT','IoT Lab','IOT_done'),
- ('BOOTH03','Project Showcase','Project Showcase','SHOW_done'),
- ('BOOTH04','Data Analysis','Data Analysis','DAT_done');
+ ('BOOTH01','VR','VR Experience','676767'),
+ ('BOOTH02','IoT','IoT Lab','767676'),
+ ('BOOTH03','Project Showcase','Project Showcase','345876'),
+ ('BOOTH04','Data Analysis','Data Analysis','987321');
